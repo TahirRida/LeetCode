@@ -3,11 +3,13 @@ class Solution {
         int left=0;int right=heights.length-1;
         int water=0;
         while(left<right){
-            int currentWater = (right-left)*Math.min(heights[left],heights[right]);
+            int a = heights[left];
+            int b = heights[right];
+            int currentWater = (right-left)*Math.min(a,b);
             if(currentWater>water){
                 water = currentWater;
             }
-            else if(heights[left] > heights[right]){
+            else if(a > b){
                 right --;
             }
             else{
