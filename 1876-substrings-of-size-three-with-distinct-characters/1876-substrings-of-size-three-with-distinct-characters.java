@@ -7,7 +7,10 @@ class Solution {
         int low = 0;
         int high = 2;
         while(high < s.length()){
-            if(s.charAt(low) == s.charAt(low +1) || s.charAt(low+1) == s.charAt(high) || s.charAt(low) == s.charAt(high)){
+            char a = s.charAt(low);
+            char b = s.charAt(low+1);
+            char c = s.charAt(high);
+            if(a==b || b == c || a == c){
                 low++;
                 high++;
                 continue;
