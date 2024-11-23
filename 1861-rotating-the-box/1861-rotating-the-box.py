@@ -6,25 +6,29 @@ class Solution(object):
         """
         m = len(box)      # Number of rows
         n = len(box[0])   # Number of columns
-        
-        # Apply gravity to each row of the box
+
+        # Initialize the rotated result matrix
+        res = [["."] * m for _ in range(n)]
+
+        # Process each row in the box and simultaneously fill the rotated matrix
         for i in range(m):
-            empty = n - 1  # Start from the rightmost column
+            empty = n - 1  # Start from the bottom of the target column
             for j in range(n - 1, -1, -1):
                 if box[i][j] == "#":  # Stone
-                    box[i][j], box[i][empty] = box[i][empty], box[i][j]
+                    res[empty][m - i - 1] = "#"
                     empty -= 1
                 elif box[i][j] == "*":  # Obstacle
-                    empty = j - 1
+                    res[j][m - i - 1] = "*"
+                    empty = j - 1  # Reset the empty pointer
+                else:  # Empty space
+                    res[j][m - i - 1] = "."
 
-        # Rotate the box 90 degrees clockwise
-        res = [[None] * m for _ in range(n)]
-        for i in range(m):
-            for j in range(n):
-                res[j][m - i - 1] = box[i][j]
-        
+            # Fill remaining spaces in the rotated matrix with empty cells
+            while empty >= 0:
+                res[empty][m - i - 1] = "."
+                empty -= 1
+
         return res
 
-                
                 
         
