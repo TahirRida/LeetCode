@@ -4,14 +4,17 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        L,length = 0,0
-        chars= set()
+        char_index = {}  # Dictionary to store the last index of each character
+        L = 0  # Left pointer
+        max_length = 0  # Length of the longest substring
+
         for R in range(len(s)):
-            while s[R] in chars :
-                chars.remove(s[L])
-                L+=1
-            chars.add(s[R])
-            length = max(length,R-L+1)
-        return length
+            if s[R] in char_index and char_index[s[R]] >= L:
+                L = char_index[s[R]] + 1  # Move left pointer to avoid repeating characters
+            char_index[s[R]] = R  # Update the last seen index of the character
+            max_length = max(max_length, R - L + 1)  # Update the maximum length
+
+        return max_length
+
             
         
