@@ -4,16 +4,14 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        char_set = set()
-        l = 0
-        max_length = 0
+        L,length = 0,0
+        chars= set()
+        for R in range(len(s)):
+            while s[R] in chars :
+                chars.remove(s[L])
+                L+=1
+            chars.add(s[R])
+            length = max(length,R-L+1)
+        return length
+            
         
-        for r in range(len(s)):
-            # Shrink the window until s[r] is unique
-            while s[r] in char_set:
-                char_set.remove(s[l])
-                l += 1
-            char_set.add(s[r])
-            max_length = max(max_length, r - l + 1)
-        
-        return max_length
